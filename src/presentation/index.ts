@@ -10,7 +10,9 @@ import { likePostEndPoint } from "./endpoints/posts/likePostEndPoint";
 import { dislikePostEndPoint } from "./endpoints/posts/dislikePostEndPoint";
 import { commentPostEndPoint } from "./endpoints/posts/commentPostEndPoint";
 
+var cors = require("cors")
 const app = express();
+app.use(cors())
 app.use(express.json());
 
 //Users
@@ -29,7 +31,7 @@ app.post("/post/comment", commentPostEndPoint);
 
 //Feed
 
-app.post("/feed", getFeedEndPoint);
-app.post("/feed/:postType", getFeedByTypeEndPoint);
+app.get("/feed", getFeedEndPoint);
+app.get("/feed/:postType", getFeedByTypeEndPoint);
 
 export default app;

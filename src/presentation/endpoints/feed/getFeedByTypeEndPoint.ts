@@ -12,9 +12,9 @@ export const getFeedByTypeEndPoint = async (req: Request, res: Response) => {
     const userId = jwtAuth.verifyToken(req.headers.auth as string);
     let postType;
 
-    if (req.params.postType === "NORMAL") {
+    if (req.query.postType === "NORMAL") {
       postType = PostType.NORMAL;
-    } else if (req.params.postType === "EVENT") {
+    } else if (req.query.postType === "EVENT") {
       postType = PostType.EVENT;
     } else {
       throw new Error("invalid type");
@@ -23,7 +23,7 @@ export const getFeedByTypeEndPoint = async (req: Request, res: Response) => {
     const input = {
       userId: userId.id,
       postType,
-      page: req.body.page
+      page: req.query.page
     };
 
     const result = await getFeedUC.execute(input);

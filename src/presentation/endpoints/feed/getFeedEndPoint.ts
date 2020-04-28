@@ -12,7 +12,7 @@ export const getFeedEndPoint = async (req: Request, res: Response) => {
 
     const input = {
       userId: userId.id,
-      page: req.body.page
+      page: req.query.page
     };
 
     const result = await getFeedUC.execute(input);
