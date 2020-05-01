@@ -50,7 +50,5 @@ export class PostDB extends BaseDB implements PostGateway {
             (\`commentId\`, \`postId\`, \`userId\`, \`comment\`)
             VALUES ('${commentId}', '${postId}', '${userId}', '${comment}');
         `);
-
-    console.log(result);
   }
 }

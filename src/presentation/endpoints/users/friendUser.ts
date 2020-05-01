@@ -17,14 +17,13 @@ export const friendUserEndPoint = async (req: Request, res: Response) => {
       userId: userInfo.id,
       friendId: req.body.friendId
     };
-    console.log(input);
+    
     await useCase.execute(input);
 
     res.send({
       message: "Friend Added Successfully"
     });
   } catch (err) {
-    console.log(err);
     res.status(400).send({
       message: err.message
     });

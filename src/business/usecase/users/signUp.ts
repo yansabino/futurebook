@@ -23,7 +23,6 @@ export class SignUpUC {
     });
 
     return {
-      message: "User signed up sucessfully!",
       token
     };
   }
@@ -36,6 +35,5 @@ export interface SignUpUCInput {
 }
 
 export interface SignUpUCOutput {
-  message: string;
   token: string;
 }

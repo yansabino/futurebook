@@ -11,12 +11,12 @@ export const loginEndPoint = async (req: Request, res: Response) => {
       new JWTAuthentication(),
       new BcryptService()
     );
-    const result = await loginUC.execute({
+    const token = await loginUC.execute({
       email: req.body.email,
       password: req.body.password
     });
 
-    res.status(200).send({ message: "User Logged In Successfully", result });
+    res.status(200).send({ token });
   } catch (err) {
     res.status(400).send({
       message: err.message
