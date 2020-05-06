@@ -14,7 +14,7 @@ Além de Poder ver o feed com os posts de amigos e o feed de posts de amigos cla
 ## Instruções para rodar
 
 - Clone o Repositório e com ele em sua máquina: `git clone https://github.com/yansabino/futurebook-backend.git`
-- Agora basta abrir o terminal e navegar até o repositório: `cd futuretube-frontend`
+- Agora basta abrir o terminal e navegar até o repositório: `cd futurebook-backend`
 - E então instala-lo e rodar-lo:
     1. `npm install` para instalar todas as dependências;
     1. `npm run start` para rodar localmente o projeto
