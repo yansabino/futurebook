@@ -14,7 +14,7 @@ export const unfriendUserEndPoint = async (req: Request, res: Response) => {
     const useCase = new UnfriendUserUC(userDataBase);
 
     const input = {
-      userId: userInfo.id,
+      userId: userInfo.userId,
       friendId: req.body.friendId
     };
 

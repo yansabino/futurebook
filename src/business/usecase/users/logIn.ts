@@ -1,12 +1,17 @@
 import { UserGateway } from "../../gateways/userGateway";
 import { AuthenticationGateway } from "../../gateways/authenticationGateway";
 import { CryptographyGateway } from "../../gateways/cryptographyGateway";
+import {
+  ACCESS_TOKEN_EXPIRES_IN,
+  REFRESH_TOKEN_EXPIRES_IN,
+} from "../../../utils/JWTAuthentication";
 
 export class LogInUC {
   constructor(
     private userGateway: UserGateway,
     private authenticationGateway: AuthenticationGateway,
-    private cryptographyGateway: CryptographyGateway
+    private cryptographyGateway: CryptographyGateway,
+    private refreshTokenGateway: RefreshTokenGateway
   ) {}
 
   public async execute(input: LogInUCInput) {
@@ -25,15 +30,48 @@ export class LogInUC {
       throw new Error("Senha Incorreta");
     }
 
-    const token = this.authenticationGateway.generateToken({
-      id: user.getId()
+    const accessToken = this.authenticationGateway.generateToken(
+      {
+        userId: user.getId(),
+      },
+      ACCESS_TOKEN_EXPIRES_IN
+    );
+
+    const refreshToken = this.authenticationGateway.generateToken(
+      {
+        userId: user.getId(),
+        userDevice: input.device,
+      },
+      REFRESH_TOKEN_EXPIRES_IN
+    );
+
+    const refreshTokenForUserAndDevice = await this.refreshTokenGateway.getRefreshToken(
+      input.device,
+      user.getId()
+    );
+
+    if (refreshTokenForUserAndDevice) {
+      await this.refreshTokenGateway.deleteRefreshToken(
+        input.device,
+        user.getId()
+      );
+    }
+
+    await this.refreshTokenGateway.createRefreshToken({
+      token: refreshToken,
+      userId: user.getId(),
+      device: input.device,
     });
 
-    return token;
+    return {
+      accessToken,
+      refreshToken,
+    };
   }
 }
 
 export interface LogInUCInput {
   email: string;
   password: string;
+  device: string;
 }

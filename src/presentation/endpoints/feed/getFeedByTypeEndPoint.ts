@@ -21,7 +21,7 @@ export const getFeedByTypeEndPoint = async (req: Request, res: Response) => {
     }
 
     const input = {
-      userId: userId.id,
+      userId: userId.userId,
       postType,
       page: req.query.page
     };

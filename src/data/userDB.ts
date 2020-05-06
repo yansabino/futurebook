@@ -14,7 +14,7 @@ export class UserDB extends BaseDB implements UserGateway {
           id: user.getId(),
           name: user.getName(),
           email: user.getEmail(),
-          password: user.getPassword()
+          password: user.getPassword(),
         })
         .into(this.userTableName);
     } catch (err) {
@@ -37,6 +37,23 @@ export class UserDB extends BaseDB implements UserGateway {
     }
 
     return new User(user[0].id, user[0].name, user[0].email, user[0].password);
+  }
+
+  public async getUserById(userId: string): Promise<User | undefined> {
+    const result = await this.connection.raw(`
+      SELECT * FROM ${this.userTableName} WHERE id = "${userId}"
+    `);
+
+    if (!result[0][0]) {
+      return undefined;
+    }
+
+    return new User(
+      result[0][0].id,
+      result[0][0].name,
+      result[0][0].email,
+      result[0][0].password
+    );
   }
 
   public async createFriendRelation(

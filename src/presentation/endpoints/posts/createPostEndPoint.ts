@@ -12,7 +12,7 @@ export const createPostEndpoint = async (req: Request, res: Response) => {
       picture: req.body.picture,
       description: req.body.description,
       postType: req.body.postType,
-      userId: userId.id
+      userId: userId.userId
     };
     
     await createPostUC.execute(input);

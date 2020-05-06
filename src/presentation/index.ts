@@ -9,8 +9,9 @@ import { getFeedByTypeEndPoint } from "./endpoints/feed/getFeedByTypeEndPoint";
 import { likePostEndPoint } from "./endpoints/posts/likePostEndPoint";
 import { dislikePostEndPoint } from "./endpoints/posts/dislikePostEndPoint";
 import { commentPostEndPoint } from "./endpoints/posts/commentPostEndPoint";
-
+import { refreshAccessTokenEndPoint } from "./endpoints/users/refreshAccessToken";
 var cors = require("cors")
+
 const app = express();
 app.use(cors())
 app.use(express.json());
@@ -33,5 +34,9 @@ app.post("/post/comment", commentPostEndPoint);
 
 app.get("/feed", getFeedEndPoint);
 app.get("/feed/:postType", getFeedByTypeEndPoint);
+
+// refresh token
+
+app.get("/auth/refresh", refreshAccessTokenEndPoint)
 
 export default app;

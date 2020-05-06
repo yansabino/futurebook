@@ -14,7 +14,7 @@ export const likePostEndPoint = async (req: Request, res: Response) => {
     const useCase = new LikePostUC(postDB);
 
     const input = {
-      userId: userInfo.id,
+      userId: userInfo.userId,
       postId: req.body.postId
     };
 

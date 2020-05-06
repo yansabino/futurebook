@@ -16,7 +16,7 @@ export const commentPostEndPoint = async (req: Request, res: Response) => {
 
     const input = {
       postId: req.body.postId,
-      userId: userInfo.id,
+      userId: userInfo.userId,
       comment: req.body.comment
     };
 

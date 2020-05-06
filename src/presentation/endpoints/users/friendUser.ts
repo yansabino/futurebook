@@ -14,7 +14,7 @@ export const friendUserEndPoint = async (req: Request, res: Response) => {
     const useCase = new FriendUserUC(userDataBase);
 
     const input = {
-      userId: userInfo.id,
+      userId: userInfo.userId,
       friendId: req.body.friendId
     };
     

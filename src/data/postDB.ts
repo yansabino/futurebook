@@ -16,7 +16,7 @@ export class PostDB extends BaseDB implements PostGateway {
           description: post.getDescription(),
           creationDate: post.getCreationDate(),
           postType: post.getPostType(),
-          userId: post.getUserId()
+          userId: post.getUserId(),
         })
         .into(this.postTableName);
     } catch (err) {
@@ -34,9 +34,9 @@ export class PostDB extends BaseDB implements PostGateway {
 
   public async dislikePost(userId: string, postId: string): Promise<void> {
     await this.connection.raw(`
-            DELETE FROM ${this.likeTableName}
-            WHERE user_id = '${userId}' AND post_id = '${postId}';
-        `);
+        DELETE FROM ${this.likeTableName}
+        WHERE user_id = '${userId}' AND post_id = '${postId}';
+      `);
   }
 
   public async commentPost(
@@ -45,10 +45,10 @@ export class PostDB extends BaseDB implements PostGateway {
     userId: string,
     comment: string
   ): Promise<void> {
-    const result = await this.connection.raw(`
-        INSERT INTO ${this.commentTableName}
-            (\`commentId\`, \`postId\`, \`userId\`, \`comment\`)
-            VALUES ('${commentId}', '${postId}', '${userId}', '${comment}');
-        `);
+    await this.connection.raw(`
+      INSERT INTO ${this.commentTableName}
+        (\`commentId\`, \`postId\`, \`userId\`, \`comment\`)
+        VALUES ('${commentId}', '${postId}', '${userId}', '${comment}');
+    `);
   }
 }

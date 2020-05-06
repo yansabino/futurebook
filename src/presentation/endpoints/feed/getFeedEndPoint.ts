@@ -11,7 +11,7 @@ export const getFeedEndPoint = async (req: Request, res: Response) => {
     const userId = jwtAuth.verifyToken(req.headers.auth as string);
 
     const input = {
-      userId: userId.id,
+      userId: userId.userId,
       page: req.query.page
     };
 
