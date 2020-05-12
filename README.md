@@ -12,7 +12,7 @@ Esse foi um projeto de Backend que utilizei para reproduzir o funcionamento do s
 Além de Poder ver o feed com os posts de amigos e o feed de posts de amigos classificados como um Post tipo Normal ou tipo Evento.
 
 ## Instruções para rodar
-
+### OBS: para rodar o projeto são necessarias as informações do banco de dados e a chave do token, caso queira, por favor entrar em contato comigo por esse email que eu enviarei o arquivo `.env`.
 - Clone o Repositório e com ele em sua máquina: `git clone https://github.com/yansabino/futurebook-backend.git`
 - Agora basta abrir o terminal e navegar até o repositório: `cd futurebook-backend`
 - E então instala-lo e rodar-lo:
